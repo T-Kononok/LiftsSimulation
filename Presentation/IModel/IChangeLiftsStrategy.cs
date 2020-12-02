@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Presentation.IModel {
     interface IChangeLiftsStrategy {
-        public void ChangeLiftsStrategy(LiftsStrategies strategy);
+        void ChangeLiftsStrategy(LiftsStrategies strategy);
     }
 
     public enum LiftsStrategies {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Presentation.Entities {
-    readonly struct HumanStartingData {
+    public readonly struct HumanStartingData {
 
         public String Name { get; }
         public int StartingFloor { get; }

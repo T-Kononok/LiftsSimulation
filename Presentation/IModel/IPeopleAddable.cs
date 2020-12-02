@@ -5,7 +5,7 @@ using Presentation.Entities;
 
 namespace Presentation.IModel {
     interface IPeopleAddable {
-        public bool AddPeople(HumanStartingData data);
+        bool AddPeople(HumanStartingData data);
 
     }
 }
