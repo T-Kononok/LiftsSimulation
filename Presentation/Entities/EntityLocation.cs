@@ -11,6 +11,7 @@ namespace Presentation.Entities {
     }
 
     public enum Entities {
+        Unknown,
         Lift,
         Human
     }
