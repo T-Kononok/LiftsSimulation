@@ -5,6 +5,6 @@ using Presentation.Entities;
 
 namespace Presentation.IModel {
     interface IGivingHumanInfo {
-        public HumanInfo GetHumanInfo(EntityLocation location);
+        HumanInfo GetHumanInfo(EntityLocation location);
     }
 }

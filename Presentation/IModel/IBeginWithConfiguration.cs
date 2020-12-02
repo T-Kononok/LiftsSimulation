@@ -4,8 +4,8 @@ using System.Text;
 using Presentation.Entities;
 
 namespace Presentation.IModel {
-    interface ISettingInitialConfiguration {
-        public bool Begin(InitialConfiguration configuration);
+    interface IBeginWithConfiguration {
+        void Begin(BeginningConfiguration configuration);
 
     }
 }

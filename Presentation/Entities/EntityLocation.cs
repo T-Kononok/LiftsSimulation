@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Presentation.Entities {
 
-    readonly struct EntityLocation {
+    public readonly struct EntityLocation {
         public Entities Entities { get; }
         public int X { get; }
         public int Y { get; }
