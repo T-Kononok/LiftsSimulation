@@ -15,10 +15,4 @@ namespace Presentation.Entities {
             Y = y;
         }
     }
-
-    public enum EntityType {
-        Unknown,
-        Lift,
-        Human
-    }
 }
