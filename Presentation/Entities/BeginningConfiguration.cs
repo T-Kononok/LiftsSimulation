@@ -7,5 +7,9 @@ namespace Presentation.Entities {
         public int QuantityFloors { get; }
         public int QuantityLifts { get; }
 
+        public BeginningConfiguration(int quantityFloors, int quantityLifts) {
+            QuantityFloors = quantityFloors;
+            QuantityLifts = quantityLifts;
+        }
     }
 }

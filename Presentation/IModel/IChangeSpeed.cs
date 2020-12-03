@@ -5,9 +5,8 @@ using System.Text;
 namespace Presentation.IModel {
     interface IChangeSpeed {
         DateTime GetTime();
-        void Stop();
-        void Start();
+        void Pause();
+        void Play();
         void ChangeSpeed(float coefficient);
-
     }
 }
