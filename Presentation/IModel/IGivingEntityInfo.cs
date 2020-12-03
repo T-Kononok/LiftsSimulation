@@ -4,7 +4,7 @@ using System.Text;
 using Presentation.Entities;
 
 namespace Presentation.IModel {
-    interface IGivingEntityInfo {
+    public interface IGivingEntityInfo {
         HumanInfo GetEntityInfo(EntityLocation location);
     }
 }

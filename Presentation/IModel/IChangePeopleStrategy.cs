@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Presentation.IModel {
-    interface IChangePeopleStrategy {
+    public interface IChangePeopleStrategy {
         void ChangePeopleStrategy(PeopleStrategies strategy);
     }
 

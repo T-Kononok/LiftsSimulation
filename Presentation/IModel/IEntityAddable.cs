@@ -4,7 +4,7 @@ using System.Text;
 using Presentation.Entities;
 
 namespace Presentation.IModel {
-    interface IEntityAddable {
+    public interface IEntityAddable {
         bool AddEntity(EntityStartingData data);
     }
 }
