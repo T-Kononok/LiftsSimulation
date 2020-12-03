@@ -4,7 +4,7 @@ using System.Text;
 using Presentation.Entities;
 
 namespace Presentation.IModel {
-    interface IPeopleAddable {
-        bool AddPeople(HumanStartingData data);
+    interface IEntityAddable {
+        bool AddEntity(EntityStartingData data);
     }
 }

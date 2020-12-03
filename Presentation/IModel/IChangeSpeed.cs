@@ -7,6 +7,6 @@ namespace Presentation.IModel {
         DateTime GetTime();
         void Pause();
         void Play();
-        void ChangeSpeed(float coefficient);
+        void ChangeSpeed(double coefficient);
     }
 }
