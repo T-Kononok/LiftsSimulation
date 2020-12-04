@@ -10,7 +10,7 @@ namespace PhysicalModel {
         public double X { get; set; } = 0;
         public double Y { get; set; } = 0;
 
-        public Entity(String name, EntityType type, int x, int y) {
+        public Entity(String name, EntityType type, double x, double y) {
             Name = name;
             Type = type;
             X = x;
