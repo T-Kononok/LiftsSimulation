@@ -17,7 +17,7 @@ namespace PhysicalModel {
             Y = y;
         }
 
-        public abstract void RecalculateLocation();
+        public abstract bool RecalculateLocation();
 
         public abstract EntityLocation GetLocation();
     }

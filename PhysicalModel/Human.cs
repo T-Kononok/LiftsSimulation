@@ -7,38 +7,54 @@ using static PhysicalModel.PhysicalContext;
 namespace PhysicalModel {
     class Human : Entity {
 
-        public static double _speed = 2.0;
-        public static double Speed {
-            get {
-                return _speed;
-            }
-            set {
-                if (value <= 0.01)
-                    value = 0.01;
-                _speed = value;
-            }
+        public enum ConditionsType {
+            InStartingFloor,
+            ToStand,
+            InTargetFloor
         }
 
-        public int StartingFloor { get; }
-        public int TargetFloor { get; }
+        public ConditionsType Conditions { get; set; } 
+            = ConditionsType.InStartingFloor;
 
-        private static int _travelTime = 0;
-        public static int TravelTime { get { return _travelTime; } }
+        private double _speed = 2.0;
 
-        private static int _witingTime = 0;
-        public static int WaitingTime { get { return _witingTime; } }
+        private int _startingFloor;
+        private int _targetFloor;
 
-        public bool IsDelivered { get; } = false;
+        private int _travelTime = 0;
+        //private int _witingTime = 0;
+        private int _timeAfterArrival = 0;
 
-        public Human(HumanStartingData data) :
-            base(data.Name, EntityType.Human, FloorsLength * 0.9, data.StartingFloor * FloorsHeight) {
-            StartingFloor = data.StartingFloor;
-            TargetFloor = data.TargetFloor;
+        public delegate void WaitHandler(Human human);
+        event WaitHandler Wait;
+
+        public Human(HumanStartingData data, WaitHandler handler) :
+            base(data.Name, EntityType.Human, AllLiftLength + FloorsLength * 0.9,
+                data.StartingFloor * (FloorsHeight + SlabsHeight) - FloorsHeight + EntityDiameter*2) {
+            _startingFloor = data.StartingFloor;
+            _targetFloor = data.TargetFloor;
+            Wait += handler;
         }
 
-        public override void RecalculateLocation() {
-            if (X > 0) {
-                X -= Speed;
+        public override bool RecalculateLocation() {
+            _travelTime++;
+
+            switch (Conditions) {
+                case ConditionsType.InStartingFloor:
+                    X -= _speed;
+                    if (X < AllLiftLength + WaitingAreaLength) {
+                        Conditions = ConditionsType.ToStand;
+                        Wait(this);
+                    }
+                    return true;
+                case ConditionsType.InTargetFloor:
+                    _timeAfterArrival++;
+                    X += _speed;
+                    if (_timeAfterArrival >= 3)
+                        return false;
+                    return true;
+                default:
+                    return true;
             }
         }
 

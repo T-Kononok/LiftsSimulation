@@ -23,17 +23,33 @@ namespace PhysicalModel {
             LocationsChanged(_locations);
         }
 
+        private void WaitHandler(Human human) {
+            //нужно создать AreasList
+        }
+
         void RecalculateLocation(Entity entity) {
-            entity.RecalculateLocation();
-            _locations.Add(entity.GetLocation());
+            if (entity.RecalculateLocation())
+                _locations.Add(entity.GetLocation());
+            else
+                _entities.Remove(entity);
         }
 
         public EntitiesList(ClockGenerator generator) {
             generator.SetClockHandler(ClockHandler);
         }
 
-        public void AddEntity(Entity data) {
-            //
+        public void AddEntity(EntityStartingData data) {
+            switch (data.Type) {
+                case EntityType.Human:
+                    _entities.Add(new Human((HumanStartingData)data, WaitHandler)) ;
+                    break;
+                case EntityType.Lift:
+                    break;
+                default:
+                    System.Console.WriteLine("Попытка добавить неизвестного!");
+                    break;
+            }
+
         }
     }
 }
