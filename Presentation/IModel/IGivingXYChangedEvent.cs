@@ -7,7 +7,7 @@ using System.Text;
 namespace Presentation.IModel {
     public interface IGivingXYChangedEvent {
 
-        public delegate void XYChangedHandler(List<EntityLocation> locations);
+        public delegate void XYChangedHandler(LinkedList<EntityLocation> locations);
         event XYChangedHandler LocationsChanged;
         public void SetXYChangedHandler(XYChangedHandler handler);
     }
