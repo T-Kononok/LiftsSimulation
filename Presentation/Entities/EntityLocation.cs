@@ -6,10 +6,10 @@ namespace Presentation.Entities {
 
     public readonly struct EntityLocation {
         public EntityType Type { get; }
-        public int X { get; }
-        public int Y { get; }
+        public double X { get; }
+        public double Y { get; }
 
-        public EntityLocation(EntityType type, int x, int y) {
+        public EntityLocation(EntityType type, double x, double y) {
             Type = type;
             X = x;
             Y = y;

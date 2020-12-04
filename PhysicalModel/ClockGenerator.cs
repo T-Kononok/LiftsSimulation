@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using static System.Math;
 
 namespace PhysicalModel {
-    public class ClockGenerator {
+    class ClockGenerator {
 
         readonly Task _task;
 
