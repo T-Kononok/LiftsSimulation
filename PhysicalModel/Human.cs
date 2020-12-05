@@ -2,57 +2,49 @@
 using System.Collections.Generic;
 using System.Text;
 using Presentation.Entities;
-using static PhysicalModel.PhysicalContext;
-using static PhysicalModel.AreasList;
+using PhysicalModel.Interfaces;
 
 namespace PhysicalModel {
-    class Human : Entity {
+    class Human : Entity, IHuman {
 
-        public enum ConditionsType {
-            InStartingFloor,
-            ToStand,
-            InTargetFloor
-        }
+        public String Name { get; } 
 
-        public ConditionsType Conditions { get; set; } 
-            = ConditionsType.InStartingFloor;
+        private readonly double _speed = 2.0;
 
-        private double _speed = 2.0;
-
-        private int _startingFloor;
-        private int _targetFloor;
+        private readonly int _startingFloor;
+        public int TargetFloor { get; }
 
         private int _travelTime = 0;
-        //private int _witingTime = 0;
+        private int _witingTime = 0;
         private int _timeAfterArrival = 0;
 
-        public delegate void WaitHandler(Human human);
-        event WaitHandler Wait;
+        public bool IsArrival { get; set; } = false;
 
-        public Human(HumanStartingData data, WaitHandler handler) :
-            base(data.Name, EntityType.Human, AllLiftLength + FloorsLength * 0.9,
-                data.StartingFloor * (FloorsHeight + SlabsHeight) - FloorsHeight + EntityDiameter*2) {
+        public Human(HumanStartingData data) :
+            base(EntityType.Human, IFloor.Length * 0.9, 2 * IEntity.Diameter) {
+            Name = data.Name;
             _startingFloor = data.StartingFloor;
             _targetFloor = data.TargetFloor;
-            Wait += handler;
         }
 
         public override bool RecalculateLocation() {
             _travelTime++;
 
-            switch (Conditions) {
-                case ConditionsType.InStartingFloor:
-                    X -= _speed;
-                    if (X < AllLiftLength + WaitingAreaLength) {
-                        Conditions = ConditionsType.ToStand;
-                        Wait(this);
+            switch (Source) {
+                case IFloor _:
+                    var speed = _speed;
+                    if (IsArrival) {
+                        speed *= -1;
+                        _timeAfterArrival++;
+                        if (_timeAfterArrival > 2)
+                            return false;
                     }
+                    X -= speed;
                     return true;
-                case ConditionsType.InTargetFloor:
-                    _timeAfterArrival++;
-                    X += _speed;
-                    if (_timeAfterArrival >= 3)
-                        return false;
+                case IHQueue _:
+                    _witingTime++;
+                    return true;
+                case ILift _:
                     return true;
                 default:
                     return true;
@@ -60,7 +52,7 @@ namespace PhysicalModel {
         }
 
         public override EntityLocation GetLocation() {
-            return new EntityLocation(EntityType.Human, X, Y);
+            return new EntityLocation(EntityType.Human, Source.XAr + X, Source.YAr + Y);
         }
     }
 }
