@@ -25,9 +25,9 @@ namespace PhysicalModel {
             entity.X = X + _entities.Count * EntityDiameter * 1.5;
         }
 
-        public Stack<Entity> FillLift() {
+        public Stack<Entity> FillLift(Lift lift) {
             var stack = new Stack<Entity>();
-            for (var i = 0; i < LiftCapacity; i++) {
+            for (var i = 0; i < LiftCapacity - lift.GetCount(); i++) {
                 if (_entities.Count == 0)
                     break;
                 stack.Push(_entities.Dequeue());
