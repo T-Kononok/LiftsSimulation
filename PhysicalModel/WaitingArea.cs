@@ -9,11 +9,9 @@ namespace PhysicalModel {
         private Queue<Entity> _entities = new Queue<Entity>();
 
         public double X { get; set; } = 0;
-        public double Y { get; set; } = 0;
 
-        public WaitingArea(double x, double y) {
+        public WaitingArea(double x) {
             X = x;
-            Y = y;
         }
 
         public void EnqueueEntity(Entity entity) {

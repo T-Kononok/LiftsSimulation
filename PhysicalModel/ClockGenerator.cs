@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
 using static System.Math;
+using PhysicalModel.Interfaces;
 
 namespace PhysicalModel {
-    class ClockGenerator {
+    class ClockGenerator : IClockGenerator {
 
-        readonly Task _task;
+        private readonly Task _task;
 
-        bool _isWork = false;
+        private bool _isWork = false;
 
-        bool _isPause = false;
+        private bool _isPause = false;
 
-        DateTime Time { get; } = new DateTime();
+        public DateTime Time { get; } = new DateTime();
 
-        double _coefficient = 1.0;
+        private double _coefficient = 1.0;
         public double Сoefficient {
             get {
                 return _coefficient;
@@ -25,10 +26,9 @@ namespace PhysicalModel {
             }
         }
 
-        public delegate void ClockHandler();
-        event ClockHandler Clock;
+        private event IClockGenerator.ClockHandler Clock;
 
-        public void SetClockHandler(ClockHandler handler) {
+        public void SetClockHandler(IClockGenerator.ClockHandler handler) {
             Clock += handler;
         }
 
@@ -48,9 +48,9 @@ namespace PhysicalModel {
 
         public void Pause() => _isPause = true;
 
-        public void Play() => _isPause = false; 
+        public void Play() => _isPause = false;
 
-        void Action() {
+        private void Action() {
             while (_isWork) {
                 while (_isPause) { }
                 Task.Delay(GetPseudoSecond()).Wait();
@@ -59,8 +59,9 @@ namespace PhysicalModel {
             }
         }
 
-        int GetPseudoSecond() {
+        private int GetPseudoSecond() {
             return (int)Round(1000.0 * Сoefficient);
         }
+
     }
 }

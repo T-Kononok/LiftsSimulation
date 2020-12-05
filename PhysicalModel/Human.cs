@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Presentation.Entities;
 using static PhysicalModel.PhysicalContext;
+using static PhysicalModel.AreasList;
 
 namespace PhysicalModel {
     class Human : Entity {

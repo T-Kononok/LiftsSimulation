@@ -3,47 +3,47 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Presentation.Entities;
+using PhysicalModel.Interfaces;
 
 namespace PhysicalModel {
-    class EntitiesList {
+    class EntitiesList : IEntitiesList {
 
-        private AreasList _areasList = new AreasList();
+        private IAreaList _areasList;
 
         private LinkedList<Entity> _entities = new LinkedList<Entity>();
-        private LinkedList<EntityLocation> _locations;
+        
 
-        public delegate void LocationsChangedHandler(LinkedList<EntityLocation> locations);
-        event LocationsChangedHandler LocationsChanged;
-
-        public void SetLocationsChangedHandler(LocationsChangedHandler handler) {
+        event IEntitiesList.LocationsChangedHandler LocationsChanged;
+        public void SetLocationsChangedHandler(IEntitiesList.LocationsChangedHandler handler) {
             LocationsChanged += handler;
         }
 
         private void ClockHandler() {
-            _locations = new LinkedList<EntityLocation>();
-            Parallel.ForEach(_entities, RecalculateLocation);
-            LocationsChanged(_locations);
+            var locations = new LinkedList<EntityLocation>();
+            Parallel.ForEach(_entities, RecalculateAllLocations);
+            LocationsChanged(locations);
+
+            void RecalculateAllLocations(Entity entity) {
+                if (entity.RecalculateLocation())
+                    locations.AddFirst(entity.GetLocation());
+                else
+                    _entities.Remove(entity);
+            }
         }
 
-        private void WaitHandler(Human human) {
-            _areasList.AddHuman(human);
-        }
-
-        void RecalculateLocation(Entity entity) {
-            if (entity.RecalculateLocation())
-                _locations.AddFirst(entity.GetLocation());
-            else
-                _entities.Remove(entity);
-        }
-
-        public EntitiesList(ClockGenerator generator) {
+        public void SetClockHandler(IClockGenerator generator) {
             generator.SetClockHandler(ClockHandler);
+        }
+
+        public EntitiesList(IClockGenerator generator, IAreaList areaList) {
+            SetClockHandler(generator);
+            _areasList = areaList;
         }
 
         public void AddEntity(EntityStartingData data) {
             switch (data.Type) {
                 case EntityType.Human:
-                    _entities.AddFirst(new Human((HumanStartingData)data, WaitHandler)) ;
+                    _entities.AddFirst(new Human((HumanStartingData)data, _areasList.AddHuman)) ;
                     break;
                 case EntityType.Lift:
                     break;
