@@ -1,5 +1,5 @@
 ﻿using System;
-using Presentation.IModel;
+using IModel;
 
 namespace Services {
     class EndingService : IEnding {

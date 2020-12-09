@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Presentation.IModel {
+namespace IModel {
     public interface IChangeSpeed {
         DateTime GetTime();
         void Pause();

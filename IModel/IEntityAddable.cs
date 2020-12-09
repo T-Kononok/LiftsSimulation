@@ -1,7 +1,7 @@
 ﻿
 using Entities;
 
-namespace Presentation.IModel {
+namespace IModel {
     public interface IEntityAddable {
         bool AddEntity(EntityStartingData data);
     }

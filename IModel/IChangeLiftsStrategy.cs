@@ -1,5 +1,5 @@
 ﻿
-namespace Presentation.IModel {
+namespace IModel {
     public interface IChangeLiftsStrategy {
         void ChangeLiftsStrategy(LiftsStrategies strategy);
     }

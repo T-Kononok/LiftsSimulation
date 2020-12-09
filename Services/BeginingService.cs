@@ -1,5 +1,5 @@
 ﻿using System;
-using Presentation.IModel;
+using IModel;
 using Entities;
 
 namespace Services {

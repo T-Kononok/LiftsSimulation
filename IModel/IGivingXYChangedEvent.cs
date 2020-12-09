@@ -1,7 +1,7 @@
 ﻿using Entities;
 using System.Collections.Generic;
 
-namespace Presentation.IModel {
+namespace IModel {
     public interface IGivingXYChangedEvent {
 
         public delegate void XYChangedHandler(List<EntityLocation> locations);
