@@ -1,5 +1,5 @@
 ﻿
-namespace Presentation.Entities {
+namespace Entities {
     public readonly struct BeginningConfiguration {
         public int QuantityFloors { get; }
         public int QuantityLifts { get; }

@@ -1,5 +1,5 @@
 ﻿
-namespace Presentation.Entities {
+namespace Entities {
     public enum EntityType {
         Unknown,
         Lift,

@@ -1,4 +1,4 @@
-﻿using Presentation.Entities;
+﻿using Entities;
 using System.Collections.Generic;
 
 namespace Presentation.IModel {

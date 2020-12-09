@@ -1,6 +1,6 @@
 ﻿using System;
 using Presentation.IModel;
-using Presentation.Entities;
+using Entities;
 
 namespace Services {
     class EntityAddableService : IEntityAddable {

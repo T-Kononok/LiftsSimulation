@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Presentation.Entities {
+namespace Entities {
     public class HumanStartingData : EntityStartingData {
         public String Name { get; }
         public int StartingFloor { get; }

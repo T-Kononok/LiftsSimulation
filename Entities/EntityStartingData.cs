@@ -1,5 +1,5 @@
 ﻿
-namespace Presentation.Entities {
+namespace Entities {
     public abstract class EntityStartingData {
         public EntityType Type { get; }
 

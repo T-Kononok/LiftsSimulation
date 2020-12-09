@@ -1,5 +1,5 @@
 ﻿
-namespace Presentation.Entities {
+namespace Entities {
 
     public readonly struct EntityLocation {
         public EntityType Type { get; }

@@ -1,5 +1,5 @@
 ﻿
-using Presentation.Entities;
+using Entities;
 
 namespace Presentation.IModel {
     public interface IGivingEntityInfo {
