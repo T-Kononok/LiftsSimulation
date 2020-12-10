@@ -1,13 +1,18 @@
 ﻿using System;
 using IModel;
-using Services;
 using Entities;
+using Autofac;
 
 namespace Presentation {
     class MainClass {
         static void Main(string[] args) {
-            IBegining beginingSevise = new BeginingService();
-            beginingSevise.Begin(new BeginningConfiguration(5,1));
+
+            var container = Autofac.AutofacBuilder.Build();
+
+            using (var scope = container.BeginLifetimeScope()) {
+                var beginingSevise = scope.Resolve<IBegining>();
+                beginingSevise.Begin(new BeginningConfiguration(5, 1));
+            }
         }
     }
 }

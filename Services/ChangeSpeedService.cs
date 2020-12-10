@@ -2,7 +2,7 @@
 using IModel;
 
 namespace Services {
-    class ChangeSpeedService : IChangeSpeed {
+    public class ChangeSpeedService : IChangeSpeed {
         public void ChangeSpeed(double coefficient) {
             throw new NotImplementedException();
         }

@@ -5,7 +5,8 @@ using Entities;
 namespace Services {
     public class BeginingService : IBegining {
         public void Begin(BeginningConfiguration configuration) {
-            throw new NotImplementedException();
+            Console.WriteLine($"Начало с {configuration.QuantityFloors} этажами и " +
+                $"{configuration.QuantityLifts} лифтами");
         }
     }
 }

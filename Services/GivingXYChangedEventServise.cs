@@ -2,7 +2,7 @@
 using IModel;
 
 namespace Services {
-    class GivingXYChangedEventServise : IGivingXYChangedEvent {
+    public class GivingXYChangedEventServise : IGivingXYChangedEvent {
 
         public event IGivingXYChangedEvent.XYChangedHandler LocationsChanged;
         
