@@ -8,6 +8,7 @@ namespace IModel {
         Fire,
         MinTimeout,
         MinIdling,
-        MinDeliveryTime
+        MinDeliveryTime,
+        OldStratege
     }
 }

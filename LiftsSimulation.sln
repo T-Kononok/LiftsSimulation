@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{A065E184-1B9F-491F-B0AB-E6B266D809E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{CFBC6A42-95A3-4E47-A8B0-5F652345C85A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{CFBC6A42-95A3-4E47-A8B0-5F652345C85A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IModel", "IModel\IModel.csproj", "{48E0AEC6-82FB-4016-86A8-6D693CCE978F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IModel", "IModel\IModel.csproj", "{48E0AEC6-82FB-4016-86A8-6D693CCE978F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
