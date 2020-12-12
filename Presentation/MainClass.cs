@@ -11,7 +11,7 @@ namespace Presentation {
 
             using (var scope = container.BeginLifetimeScope()) {
                 var beginingSevise = scope.Resolve<IBegining>();
-                beginingSevise.Begin(new BeginningConfiguration(5, 1));
+                //beginingSevise.Begin(new BeginningConfiguration(5, 1));
             }
         }
     }

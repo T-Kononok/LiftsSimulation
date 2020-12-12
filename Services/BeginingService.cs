@@ -5,8 +5,7 @@ using Entities;
 namespace Services {
     public class BeginingService : IBegining {
         public void Begin(BeginningConfiguration configuration) {
-            Console.WriteLine($"Начало с {configuration.QuantityFloors} этажами и " +
-                $"{configuration.QuantityLifts} лифтами");
+
         }
     }
 }
