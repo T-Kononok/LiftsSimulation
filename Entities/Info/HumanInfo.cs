@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Entities {
-    public class HumanInfo : EntityInfo {
+    public class HumanInfo : MoveableInfo {
         public String Name { get; }
         public int StartingFloor { get; }
         public int TargetFloor { get; }
@@ -9,8 +9,9 @@ namespace Entities {
         public int WaitingTime { get; }
         public bool IsDelivered { get; }
 
-        public HumanInfo(String name, int startingFloor, int targetFloor, int travelTime,
-            int waitingTime, bool isDelivered) : base(EntityType.Human) {
+        public HumanInfo(HumanPosition position, String name, int startingFloor,
+            int targetFloor, int travelTime, int waitingTime, bool isDelivered)
+            : base(position) {
             Name = name;
             StartingFloor = startingFloor;
             TargetFloor = targetFloor;

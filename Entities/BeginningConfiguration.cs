@@ -1,12 +1,14 @@
 ﻿
+using System.Collections.Generic;
+
 namespace Entities {
     public readonly struct BeginningConfiguration {
         public int QuantityFloors { get; }
-        public int QuantityLifts { get; }
+        public LinkedList<LiftStartingData> Lifts { get; }
 
-        public BeginningConfiguration(int quantityFloors, int quantityLifts) {
+        public BeginningConfiguration(int quantityFloors, LinkedList<LiftStartingData> lifts) {
             QuantityFloors = quantityFloors;
-            QuantityLifts = quantityLifts;
+            Lifts = lifts;
         }
     }
 }

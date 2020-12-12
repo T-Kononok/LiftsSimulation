@@ -4,7 +4,7 @@ using Entities;
 
 namespace Services {
     public class EntityAddableService : IEntityAddable {
-        public bool AddEntity(EntityStartingData data) {
+        public bool AddEntity(StartingData data) {
             throw new NotImplementedException();
         }
     }
