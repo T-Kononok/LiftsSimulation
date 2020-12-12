@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Entities {
-    public class HumanInfo : MoveableInfo {
+    public class HumanInfo : MovableInfo {
         public String Name { get; }
         public int StartingFloor { get; }
         public int TargetFloor { get; }

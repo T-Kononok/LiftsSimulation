@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Entities {
-    public abstract class MoveableInfo {
+    public abstract class MovableInfo {
         public Position Position { get; }
 
-        protected MoveableInfo(Position position) {
+        protected MovableInfo(Position position) {
             Position = position;
         }
     }
