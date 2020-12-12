@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Entities {
-    public abstract class Position {
-
-        public LocationPosition Location { get; }
+    public class LocationPosition {
         public double X { get; }
         public double Y { get; }
 
-        protected Position(LocationPosition location, double x, double y) {
-            Location = location;
+        public LocationPosition(double x, double y) {
             X = x;
             Y = y;
         }
