@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Entities {
-    public class Position {
+    abstract public class Position {
         public double X { get; set; }
         public double Y { get; set; }
 
