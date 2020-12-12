@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entities {
+namespace Entities.Size {
     public class Size {
         public double Length { get; }
         public double Height { get; }

@@ -4,7 +4,6 @@ using System.Text;
 
 namespace Entities {
     public class LiftPosition : Position {
-        public LiftPosition(LocationPosition location, double x, double y)
-            : base(location, x, y) { }
+        public LiftPosition(double x, double y) : base(x, y) { }
     }
 }
