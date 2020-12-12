@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PhysicalModel.Interfaces {
+namespace PhysicalModel {
     interface IShafts : IArea {
         public double Interval { get; }
     }

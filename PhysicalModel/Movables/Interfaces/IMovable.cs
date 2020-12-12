@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Entities;
 
-namespace PhysicalModel.Interfaces {
+namespace PhysicalModel {
     interface IMovable {
         public Size Size { get; }
 

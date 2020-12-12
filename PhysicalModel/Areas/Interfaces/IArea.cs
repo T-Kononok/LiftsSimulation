@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Entities;
 
-namespace PhysicalModel.Interfaces {
+namespace PhysicalModel {
     interface IArea {
 
         public Size Size { get; }

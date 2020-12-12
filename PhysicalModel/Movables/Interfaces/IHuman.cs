@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PhysicalModel.Interfaces {
+namespace PhysicalModel {
     interface IHuman : IMovable {
         public String Name { get; }
         public int StartingFloor { get; }
