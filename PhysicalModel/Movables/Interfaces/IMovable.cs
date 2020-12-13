@@ -13,6 +13,10 @@ namespace PhysicalModel {
 
         public void SetXY(double x, double y);
 
+        public void Leave(IArea area);
+
+        public bool Come(IArea area);
+
         public bool RecalculatePosition();
         public Position GetPosition();
     }
