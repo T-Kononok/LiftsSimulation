@@ -4,12 +4,9 @@ using System.Text;
 using Entities;
 
 namespace PhysicalModel {
-    interface IMovable {
-        public Size Size { get; }
+    interface IMovable : IMaterial {
 
         public IArea Location { get; set; }
-        public double X { get; set; }
-        public double Y { get; set; }
 
         public void SetXY(double x, double y);
 
@@ -18,6 +15,7 @@ namespace PhysicalModel {
         public bool Come(IArea area);
 
         public bool RecalculatePosition();
+
         public Position GetPosition();
     }
 }

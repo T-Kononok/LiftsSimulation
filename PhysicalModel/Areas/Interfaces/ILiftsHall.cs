@@ -4,6 +4,8 @@ using System.Text;
 
 namespace PhysicalModel {
     interface ILiftsHall : IArea {
-        public int MaxCount { get; }
+        public int Number { get; }
+
+        public delegate ILiftsHall Factory(IFloor floor);
     }
 }

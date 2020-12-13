@@ -6,24 +6,23 @@ using System.Threading.Tasks;
 
 namespace PhysicalModel {
     class Floor : IFloor {
+
         public Size Size { get; } = new Size(100.0, 3.5);
 
         public double X { get; set; }
         public double Y { get; set; }
 
-        public readonly ILiftsHall _hall;
+        public int Number { get; }
+
+        public ILiftsHall Hall { get; }
 
         private readonly LinkedList<IMovable> _movables = new LinkedList<IMovable>();
 
-        public Floor(ILiftsHall hall, double x, double y) {
-            _hall = hall;
-            SetXY(x, y);
-        }
-
-        public void SetXY(double x, double y) {
+        public Floor(int number, double x, double y, ILiftsHall.Factory factory) {
+            Number = number;
             X = x;
             Y = y;
-            _hall.SetXY(x, y);
+            Hall = factory(this);
         }
 
         public Position GetPosition() {

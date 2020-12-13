@@ -4,5 +4,8 @@ using System.Text;
 
 namespace PhysicalModel {
     interface IFloor : IArea {
+        public int Number { get; }
+
+        public ILiftsHall Hall { get; }
     }
 }

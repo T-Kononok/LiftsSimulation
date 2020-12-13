@@ -3,14 +3,8 @@ using System.Collections.Generic;
 using Entities;
 
 namespace PhysicalModel {
-    interface IArea {
+    interface IArea : IMaterial {
 
-        public Size Size { get; }
-
-        public double X { get; set; }
-        public double Y { get; set; }
-
-        public void SetXY(double x, double y);
         public Position GetPosition();
 
         public bool AddMovable(IMovable movable);
