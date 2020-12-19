@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using Entities;
 
@@ -8,10 +9,9 @@ namespace PhysicalModel {
         public Position GetPosition();
 
         public bool AddMovable(IMovable movable);
-        public bool GiveMovable(IArea area, IMovable movable);
+        public bool RemoveMovable(IMovable movable);
 
-        public delegate void PositionsChangedHandler(Position location, LinkedList<Position> positions);
-        public void SetPositionsChangedHandler(PositionsChangedHandler handler);
+        public void SetPositionsChangedHandler(Action<Position, LinkedList<Position>> handler);
 
         public void GetClockHandler(IClockGenerator generator);
     }
