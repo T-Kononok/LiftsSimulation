@@ -44,17 +44,17 @@ namespace PhysicalModel {
         }
 
         private void ClockHandler() {
-            var positions = new LinkedList<Position>();
+            var positions = new List<Position>(_movables.Count);
             foreach(IMovable movable in _movables) {
                 if (!movable.HandleClock())
                     continue;
-                positions.AddFirst(movable.GetPosition());
+                positions.Add(movable.GetPosition());
             }
             PositionsChanged(GetPosition(), positions);
         }
 
-        event Action<Position,LinkedList<Position>> PositionsChanged;
-        public void SetPositionsChangedHandler(Action<Position, LinkedList<Position>> handler) {
+        event Action<Position,List<Position>> PositionsChanged;
+        public void SetPositionsChangedHandler(Action<Position, List<Position>> handler) {
             PositionsChanged += handler;
         }
     }

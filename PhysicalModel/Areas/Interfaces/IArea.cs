@@ -11,7 +11,7 @@ namespace PhysicalModel {
         public bool AddMovable(IMovable movable);
         public bool RemoveMovable(IMovable movable);
 
-        public void SetPositionsChangedHandler(Action<Position, LinkedList<Position>> handler);
+        public void SetPositionsChangedHandler(Action<Position, List<Position>> handler);
 
         public void GetClockHandler(IClockGenerator generator);
     }
