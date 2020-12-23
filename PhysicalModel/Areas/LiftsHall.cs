@@ -28,7 +28,7 @@ namespace PhysicalModel {
         }
 
         public Position GetPosition() {
-            return new FloorPosition(X, Y);
+            return new LiftsHallPosition(X, Y);
         }
 
         public bool AddMovable(IMovable movable) {
