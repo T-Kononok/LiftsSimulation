@@ -6,7 +6,7 @@ using Entities;
 namespace PhysicalModel {
     class LiftsHall : ILiftsHall {
              
-        public Size Size { get; } = new Size(20.0, 3.5);
+        public Size Size { get; };
 
         public double X { get; set; }
         public double Y { get; set; }
@@ -25,6 +25,7 @@ namespace PhysicalModel {
             Number = floor.Number;
             X = floor.X - Size.Length;
             Y = floor.Y;
+            Size = new Size(20.0,floor.Size.Height);
         }
 
         public Position GetPosition() {
