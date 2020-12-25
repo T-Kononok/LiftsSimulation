@@ -92,6 +92,7 @@ namespace PhysicalModel {
                 Acceleration = MaxAcceleration;
             if (0 < Speed && Speed < MaxSpeed)
                 Speed += Acceleration;
+            NeedMoveTo -= Speed;
             Y += Speed * Direction;
             return true;
         }
