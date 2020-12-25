@@ -31,6 +31,9 @@ namespace PhysicalModel {
 
         public bool AddMovable(IMovable movable) {
             _movables.AddFirst(movable);
+            movable.Location = this;
+            movable.Y = 0;
+            movable.X = Size.Length * 0.9;
             return true;
         }
         public bool RemoveMovable(IMovable movable) {

@@ -4,6 +4,6 @@ using System.Text;
 
 namespace PhysicalModel {
     interface IShafts : IArea {
-        public double Interval { get; }
+        public static double Interval { get; } = 3.0;
     }
 }

@@ -5,8 +5,6 @@ using Entities;
 
 namespace PhysicalModel {
     class Shafts : IShafts {
-        public double Interval { get; } = 3.0;
-
         public Size Size { get; }
 
         public double X { get; set; }
@@ -17,19 +15,13 @@ namespace PhysicalModel {
 
         private readonly List<ILift> _lifts;
 
-        public Shafts(List<ILift> lifts, List<IFloor> floors, double x, double y) {
+        public Shafts(List<ILift> lifts, double x, double y, double length, double height) {
             _lifts = lifts;
+            foreach (ILift lift in _lifts) {
+                lift.Location = this;
+            }
             X = x;
             Y = y;
-            var length = 0.0;
-            foreach(ILift lift in lifts) {
-                length += lift.Size.Length + Interval;
-            }
-            length -= Interval;
-            var height = 0.0;
-            foreach(IFloor floor in floors) {
-                height += floor.Size.Height;
-            }
             Size = new Size(length, height);
         }
 

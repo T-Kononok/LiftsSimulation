@@ -6,7 +6,7 @@ using Entities;
 namespace PhysicalModel {
     class LiftsHall : ILiftsHall {
              
-        public Size Size { get; };
+        public Size Size { get; }
 
         public double X { get; set; }
         public double Y { get; set; }
@@ -34,6 +34,7 @@ namespace PhysicalModel {
 
         public bool AddMovable(IMovable movable) {
             _movables.AddFirst(movable);
+            movable.Location = this;
             return true;
         }
         public bool RemoveMovable(IMovable movable) {
