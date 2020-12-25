@@ -10,8 +10,10 @@ namespace PhysicalModel {
 
         public void SetXY(double x, double y);
 
+        public Position GetPosition();
+
         public bool HandleClock();
 
-        public Position GetPosition();
+        
     }
 }

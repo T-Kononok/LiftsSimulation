@@ -11,5 +11,7 @@ namespace PhysicalModel {
 
         public bool TurnOnAlarm();
         public bool TurnOffAlarm();
+
+        public void SetPositionsChangedHandlers(Action<Position, List<Position>> handler);
     }
 }

@@ -9,8 +9,7 @@ namespace PhysicalModel {
 
         DateTime Time { get; }
 
-        delegate void ClockHandler();
-        void SetClockHandler(ClockHandler handler);
+        public event Action Clock;
 
         void Start();
         void Stop();

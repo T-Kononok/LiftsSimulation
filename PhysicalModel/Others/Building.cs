@@ -11,15 +11,20 @@ namespace PhysicalModel.Others {
         private readonly List<IFloor> _floors = new List<IFloor>();
         private readonly IShafts _shafts;
 
-        public Building(int quantityFloors, List<ILift> lifts, IFloor.Factory floorFactory,
+        public Building(int quantityFloors, List<ILift> lifts,
+            IClockGenerator generator, IFloor.Factory floorFactory, 
             ILiftsHall.Factory hallFactory, IShafts.Factory shaftsFactory) {
 
             _shafts = shaftsFactory(lifts, 0.0, 0.0, Interval, quantityFloors*3.5+3.5);
+            _shafts.GetClockHandler(generator);
 
             _floors.Add(floorFactory(1, 7.0, 0.0, 0.0, hallFactory));
             for (var i = 1; i < quantityFloors; i++) {
                 _floors.Add(floorFactory(i+1, 3.5, 0.0, 3.5+i*3.5, hallFactory));
             }
+
+            foreach (IFloor floor in _floors)
+                floor.GetClockHandler(generator);
         }
 
         public bool AddMovable(IMovable movable, int floorNumber) {
@@ -32,6 +37,13 @@ namespace PhysicalModel.Others {
 
         public bool TurnOnAlarm() {
             throw new NotImplementedException();
+        }
+
+        public void SetPositionsChangedHandlers(Action<Position, List<Position>> handler) {
+            _shafts.PositionsChanged += handler;
+            _shafts.SetLiftsHandlers(handler);
+            foreach (IFloor floor in _floors)
+                floor.PositionsChanged += handler;
         }
     }
 }

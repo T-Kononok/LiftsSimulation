@@ -23,13 +23,12 @@ namespace PhysicalModel {
             get { return _needMoveTo; }
             set { _needMoveTo = Max(value, 0); }
         }
+
         private int _direction = 1;
         public int Direction { 
             get { return _direction; }
             set { _direction = Sign(value); }
-        }
-
-        private readonly List<IMovable> _movables = new List<IMovable>();
+        }       
 
         public Size Size { get; }
 
@@ -43,6 +42,8 @@ namespace PhysicalModel {
         public Position GetPosition() {
             return new LiftPosition(X, Y);
         }
+
+        private readonly List<IMovable> _movables = new List<IMovable>();
 
         public Lift(LiftStartingData data, IMaterial material) {
             Capacity = data.Сapacity;
@@ -62,10 +63,6 @@ namespace PhysicalModel {
             return _movables.Remove(movable);
         }
 
-        public void GetClockHandler(IClockGenerator generator) {
-            generator.SetClockHandler(ClockHandler);
-        }
-
         private void ClockHandler() {
             var positions = new List<Position>(_movables.Count);
             Parallel.ForEach(_movables, HandleClock);
@@ -77,11 +74,11 @@ namespace PhysicalModel {
                 positions.Add(movable.GetPosition());
             }
         }
-
-        event Action<Position,List<Position>> PositionsChanged;
-        public void SetPositionsChangedHandler(Action<Position, List<Position>> handler) {
-            PositionsChanged += handler;
+        public void GetClockHandler(IClockGenerator generator) {
+            generator.Clock += ClockHandler;
         }
+
+        public event Action<Position,List<Position>> PositionsChanged;
 
         public bool HandleClock() {
             if (NeedMoveTo == 0.0) {

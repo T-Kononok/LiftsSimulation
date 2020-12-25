@@ -32,8 +32,8 @@ namespace PhysicalModel {
             TransitionTo(state);
         }
         public void TransitionTo(IHumanState state) {
-            this._state = state;
-            this._state.SetContext(this);
+            _state = state;
+            _state.SetContext(this);
         }
 
         public bool HandleClock() {

@@ -36,10 +36,6 @@ namespace PhysicalModel {
             return false;
         }
 
-        public void GetClockHandler(IClockGenerator generator) {
-            generator.SetClockHandler(ClockHandler);
-        }
-
         private void ClockHandler() {
             var positions = new List<Position>(_lifts.Count);
             Parallel.ForEach(_lifts, HandleClock);
@@ -51,10 +47,17 @@ namespace PhysicalModel {
                 positions.Add(movable.GetPosition());
             }
         }
+        public void GetClockHandler(IClockGenerator generator) {
+            generator.Clock += ClockHandler;
+            foreach (ILift lift in _lifts)
+                lift.GetClockHandler(generator);
+        }
 
-        event Action<Position,List<Position>> PositionsChanged;
-        public void SetPositionsChangedHandler(Action<Position, List<Position>> handler) {
-            PositionsChanged += handler;
+        public event Action<Position,List<Position>> PositionsChanged;
+
+        public void SetLiftsHandlers(Action<Position, List<Position>> handler) {
+            foreach (ILift lift in _lifts)
+                lift.PositionsChanged += handler;
         }
     }
 }

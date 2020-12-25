@@ -10,6 +10,9 @@ namespace PhysicalModel {
 
         public double X { get; set; }
         public double Y { get; set; }
+        public Position GetPosition() {
+            return new LiftsHallPosition(X, Y);
+        }
 
         public int Number { get; }
 
@@ -20,11 +23,7 @@ namespace PhysicalModel {
             X = floor.X - Size.Length;
             Y = floor.Y;
             Size = new Size(20.0,floor.Size.Height);
-        }
-
-        public Position GetPosition() {
-            return new LiftsHallPosition(X, Y);
-        }
+        }       
 
         public bool AddMovable(IMovable movable) {
             _movables.AddFirst(movable);
@@ -33,11 +32,7 @@ namespace PhysicalModel {
         }
         public bool RemoveMovable(IMovable movable) {
             return _movables.Remove(movable);
-        }
-
-        public void GetClockHandler(IClockGenerator generator) {
-            generator.SetClockHandler(ClockHandler);
-        }
+        }       
 
         private void ClockHandler() {
             var positions = new List<Position>(_movables.Count);
@@ -48,10 +43,10 @@ namespace PhysicalModel {
             }
             PositionsChanged(GetPosition(), positions);
         }
-
-        event Action<Position,List<Position>> PositionsChanged;
-        public void SetPositionsChangedHandler(Action<Position, List<Position>> handler) {
-            PositionsChanged += handler;
+        public void GetClockHandler(IClockGenerator generator) {
+            generator.Clock += ClockHandler;
         }
+
+        public event Action<Position,List<Position>> PositionsChanged;
     }
 }
