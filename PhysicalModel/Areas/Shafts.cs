@@ -15,14 +15,18 @@ namespace PhysicalModel {
 
         private readonly List<ILift> _lifts;
 
-        public Shafts(List<ILift> lifts, double x, double y, double length, double height) {
+        public Shafts(List<ILift> lifts, double x, double y, double interval, double height) {
             _lifts = lifts;
+            var liftX = 0.0;
             foreach (ILift lift in _lifts) {
                 lift.Location = this;
+                lift.X = liftX;
+                lift.Y = 0.0;
+                liftX += lift.Size.Height + interval;
             }
             X = x;
             Y = y;
-            Size = new Size(length, height);
+            Size = new Size(liftX - interval, height);
         }
 
         public bool AddMovable(IMovable movable) {

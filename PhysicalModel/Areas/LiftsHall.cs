@@ -15,14 +15,8 @@ namespace PhysicalModel {
 
         private readonly LinkedList<IMovable> _movables = new LinkedList<IMovable>();      
 
-        public static LiftsHall Factory(IFloor floor) {
-             return new LiftsHall(floor);
-        }
-
-        private LiftsHall() { }
-
-        private LiftsHall(IFloor floor) {
-            Number = floor.Number;
+        private LiftsHall(int number, IFloor floor) {
+            Number = number;
             X = floor.X - Size.Length;
             Y = floor.Y;
             Size = new Size(20.0,floor.Size.Height);

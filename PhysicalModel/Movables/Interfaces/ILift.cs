@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PhysicalModel {
     interface ILift : IArea, IMovable {
-        public int Capatity { get; }
+        public int Capacity { get; }
         public double Speed { get; }
         public double MaxSpeed { get; }
         public double Acceleration { get; }

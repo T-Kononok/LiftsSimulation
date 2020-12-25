@@ -4,6 +4,7 @@ using System.Text;
 
 namespace PhysicalModel {
     interface IShafts : IArea {
-        public static double Interval { get; } = 3.0;
+        public delegate IShafts Factory(List<ILift> lifts, double x, double y,
+            double interval, double height);
     }
 }

@@ -7,7 +7,7 @@ using static System.Math;
 
 namespace PhysicalModel {
     class Lift : ILift {
-        public int Capatity { get; }
+        public int Capacity { get; }
 
         private double _speed = 0.0;
         public double Speed {
@@ -45,14 +45,14 @@ namespace PhysicalModel {
         }
 
         public Lift(LiftStartingData data, IMaterial material) {
-            Capatity = data.Сapacity;
+            Capacity = data.Сapacity;
             MaxSpeed = data.MaxSpeed;
             MaxAcceleration = data.MaxAcceleration;
-            Size = new Size(Capatity * material.Size.Length*1.5, 2.5);
+            Size = new Size(Capacity * material.Size.Length*1.5, 2.5);
         }
 
         public bool AddMovable(IMovable movable) {
-            if (_movables.Count == Capatity)
+            if (_movables.Count == Capacity)
                 return false;
             _movables.Add(movable);
             movable.Location = this;

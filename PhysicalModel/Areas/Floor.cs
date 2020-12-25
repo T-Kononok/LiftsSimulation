@@ -5,24 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PhysicalModel {
-    class Floor : IFloor {
+    class Floor : IFloor{
 
-        public Size Size { get; } = new Size(80.0, 3.5);
+        public Size Size { get; }
 
         public double X { get; set; }
         public double Y { get; set; }
-
-        public int Number { get; }
 
         public ILiftsHall Hall { get; }
 
         private readonly LinkedList<IMovable> _movables = new LinkedList<IMovable>();
 
-        public Floor(int number, double x, double y, ILiftsHall.Factory factory) {
-            Number = number;
+        public Floor(int number, double height, double x, double y, ILiftsHall.Factory factory) {
+            Size = new Size(80.0, height);
             X = x;
             Y = y;
-            Hall = factory(this);
+            Hall = factory(number, this);
         }
 
         public Position GetPosition() {

@@ -6,6 +6,6 @@ namespace PhysicalModel {
     interface ILiftsHall : IArea {
         public int Number { get; }
 
-        public delegate ILiftsHall Factory(IFloor floor);
+        public delegate ILiftsHall Factory(int number, IFloor floor);
     }
 }

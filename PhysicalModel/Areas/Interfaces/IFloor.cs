@@ -4,8 +4,10 @@ using System.Text;
 
 namespace PhysicalModel {
     interface IFloor : IArea {
-        public int Number { get; }
 
         public ILiftsHall Hall { get; }
+
+        public delegate IFloor Factory(int number, double height, double x, double y,
+            ILiftsHall.Factory factory);
     }
 }
