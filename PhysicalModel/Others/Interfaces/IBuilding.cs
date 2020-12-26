@@ -14,11 +14,11 @@ namespace PhysicalModel {
         public bool SetFloors(int quantityFloors,
             IFloor.Factory floorFactory, ILiftsHall.Factory hallFactory);
 
-        public bool SetLifts(List<ILift> lifts, IShafts.Factory shaftsFactory);
+        public bool SetLifts(int quantityFloors, List<ILift> lifts, IShafts.Factory shaftsFactory);
 
         public bool SetManager(IManagerLifts manager);
 
-        public bool SetGenerator(IClockGenerator generator);
+        public bool SetGenerator(IClockGenerator generator, IManagerLifts manager);
 
         public bool SetPositionsChangedHandlers(Action<Position, List<Position>> handler);
     }

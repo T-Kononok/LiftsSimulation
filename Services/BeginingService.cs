@@ -41,10 +41,10 @@ namespace Services {
             foreach (LiftStartingData liftData in data.Lifts) {
                 lifts.Add(new Lift(liftData, 1.0));
             }
+            _building.SetLifts(data.QuantityFloors, lifts, _shaftsFactory);
             _building.SetFloors(data.QuantityFloors,
                 _floorFactory, _hallFactory);
-            _building.SetLifts(lifts, _shaftsFactory);
-            _building.SetGenerator(_generator);
+            _building.SetGenerator(_generator, _manager);
             _building.SetManager(_manager);
             _isCreate = true;
 

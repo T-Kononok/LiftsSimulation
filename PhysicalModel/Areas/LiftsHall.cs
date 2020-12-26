@@ -37,7 +37,7 @@ namespace PhysicalModel {
         public bool AddPassenger(IPassenger passenger) {
             _passengers.AddFirst(passenger);
             passenger.Location = this;
-            LiftCalling(Number, passenger.TargetFloor);
+            LiftCalling(passenger.StartingFloor, passenger.TargetFloor);
             return true;
         }
         public bool RemovePassenger(IPassenger passenger) {

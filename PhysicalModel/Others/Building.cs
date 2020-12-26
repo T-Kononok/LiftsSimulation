@@ -16,23 +16,21 @@ namespace PhysicalModel {
         public bool SetFloors(int quantityFloors,
             IFloor.Factory floorFactory, ILiftsHall.Factory hallFactory) {
 
-            _floors.Add(floorFactory(0, 7.0, 0.0, 0.0, hallFactory));
+            _floors.Add(floorFactory(0, 7.0, _shafts.Size.Length + 20.0, 0.0, hallFactory));
             for (var i = 1; i < quantityFloors; i++) {
-                _floors.Add(floorFactory(i, 3.5, 0.0, 3.5 + i * 3.5, hallFactory));
+                _floors.Add(floorFactory(i, 3.5, _shafts.Size.Length + 20.0,
+                    3.5 + i * 3.5, hallFactory));
             }
             return true;
         }
 
-        public bool SetLifts(List<ILift> lifts, IShafts.Factory shaftsFactory) {
-            if (_floors == null)
-                return false;
-            _shafts = shaftsFactory(lifts, 0.0, 0.0, Interval, _floors.Count * 3.5 + 3.5);
+        public bool SetLifts(int quantityFloors, List<ILift> lifts,
+            IShafts.Factory shaftsFactory) {
+            _shafts = shaftsFactory(lifts, 0.0, 0.0, Interval, quantityFloors * 3.5 + 3.5);
             return true;
         }
 
         public bool SetManager(IManagerLifts manager) {
-            if (_shafts == null)
-                return false;
             foreach (ILift lift in _shafts) {
                 manager.AddLift(lift);
             }
@@ -40,13 +38,13 @@ namespace PhysicalModel {
                 manager.AddHall(floor.Hall);
                 floor.Hall.LiftCalling += manager.LiftCallingHandler;
             }
+            manager.BuildMap();
             return true;
         }
 
-        public bool SetGenerator(IClockGenerator generator) {
-            if (_shafts == null)
-                return false;
+        public bool SetGenerator(IClockGenerator generator, IManagerLifts manager) {
             generator.Clock += _shafts.ClockHandler;
+            generator.Clock += manager.HandleClock;
             foreach (ILift lift in _shafts) {
                 generator.Clock += lift.ClockHandler;
             }
@@ -58,7 +56,7 @@ namespace PhysicalModel {
         }
 
         public bool AddPassenger(IPassenger passenger) {
-            return _floors[passenger.StartingFloor].AddPassenger(passenger);
+            return _floors[passenger.StartingFloor-1].AddPassenger(passenger);
         }
 
         public bool TurnOffAlarm() {
@@ -70,8 +68,6 @@ namespace PhysicalModel {
         }
 
         public bool SetPositionsChangedHandlers(Action<Position, List<Position>> handler) {
-            if (_shafts == null)
-                return false;
             _shafts.PositionsChanged += handler;
             foreach (ILift lift in _shafts)
                 lift.PositionsChanged += handler;

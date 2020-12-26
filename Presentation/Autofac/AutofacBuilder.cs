@@ -23,7 +23,7 @@ namespace Presentation.Autofac {
             builder.RegisterType<LiftsHall>().As<ILiftsHall>();
             builder.RegisterType<Shafts>().As<IShafts>().SingleInstance();
             builder.RegisterType<Passenger>().As<IPassenger>();
-            builder.RegisterType<PassengerState1>().As<IPassengerState>();
+            builder.RegisterType<InFloorState>().As<IPassengerState>();
             builder.RegisterType<Lift>().As<ILift>();
 
             builder.RegisterType<Building>().As<IBuilding>().SingleInstance();

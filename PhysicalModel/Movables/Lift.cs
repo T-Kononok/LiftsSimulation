@@ -82,12 +82,17 @@ namespace PhysicalModel {
                 Acceleration = 0;
                 return true;
             }
-            if (Acceleration == 0 || !CheckBrake())
+            if (Acceleration == 0 || !CheckBrake()) {
                 Acceleration = MaxAcceleration;
-            if (0 < Speed && Speed < MaxSpeed)
+            }
+            if (0.0 <= Speed && Speed <= MaxSpeed)
                 Speed += Acceleration;
             NeedMoveTo -= Speed;
             Y += Speed * Direction;
+            if (Abs(NeedMoveTo) <= 0.5) {
+                Y += NeedMoveTo * Direction;
+                NeedMoveTo = 0;
+            }
             return true;
         }
 

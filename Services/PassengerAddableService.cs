@@ -13,7 +13,7 @@ namespace Services {
         }
 
         public bool AddPassenger(PassengerStartingData data) {
-            _building.AddPassenger(new Passenger(data, new PassengerState1()));
+            _building.AddPassenger(new Passenger(data, new InFloorState()));
             return true;
         }
     }
