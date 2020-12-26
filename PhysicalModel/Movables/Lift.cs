@@ -78,6 +78,9 @@ namespace PhysicalModel {
         public event Action<Position,List<Position>> PositionsChanged;
 
         public bool HandleClock() {
+            Console.WriteLine(NeedMoveTo);
+            Console.WriteLine(Acceleration);
+            Console.WriteLine(Speed);
             if (NeedMoveTo == 0.0) {
                 Acceleration = 0;
                 return true;
@@ -97,8 +100,6 @@ namespace PhysicalModel {
         }
 
         private bool CheckBrake() {
-            if (Acceleration == MaxAcceleration * -1)
-                return true;
             if (NeedMoveTo <= GetBrakeWay()) {
                 Acceleration = MaxAcceleration * -1;
                 return true;

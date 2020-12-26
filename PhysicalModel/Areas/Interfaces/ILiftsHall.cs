@@ -10,7 +10,10 @@ namespace PhysicalModel {
 
         public event Action<int, int> LiftCalling;
 
-        public void ShowScoreboardHandler(int targetFloor, ILift lift);
-        public void SuppressScoreboardHandler(int targetFloor);
+        public ILift CheckOpenedLift(int floorNumber);
+
+        public void CallLift(int startingFloor, int targetFloor);
+
+        public void ShowScoreboard(int targetFloor, ILift lift);
     }
 }

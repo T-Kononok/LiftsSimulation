@@ -68,6 +68,7 @@ namespace PhysicalModel {
         private LinkedList<double> ArrivedСhoice(ILift lift) {
             var maxBenefits = 0.0;
             var maxTargetList = new LinkedList<double>();
+            var passengerTargetFloor = 0;
 
             Parallel.For(0, _matrix.Count, CalculationColumn);
 
@@ -81,7 +82,7 @@ namespace PhysicalModel {
                     for (var k = i; k != j; k += inc) {
                         if (_matrix[k][j] > 0) {
                             count += _matrix[k][j];
-                            targetList.AddFirst(_floorYMap[k]);
+                            targetList.AddLast(_floorYMap[k]);
                         }
                     }
                     var way = Abs(lift.Y - _floorYMap[i]) +
@@ -90,10 +91,21 @@ namespace PhysicalModel {
                     if (count / way > maxBenefits) {
                         maxBenefits = count / way;
                         maxTargetList = targetList;
+                        passengerTargetFloor = j;
                     }
                 }
             }
 
+            if (maxBenefits > 0.0) {
+                foreach (double d in maxTargetList) {
+                    _halls[_YFloorMap[d]].ShowScoreboard(passengerTargetFloor, lift);
+                    _matrix[_YFloorMap[d]][passengerTargetFloor] = 0;
+                }
+                maxTargetList.AddLast(_floorYMap[passengerTargetFloor]);
+                foreach (double d in maxTargetList) {
+                    Console.WriteLine("> " + d);
+                }
+            }
             return maxTargetList;
         }     
     }

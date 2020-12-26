@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Entities;
 
 namespace PhysicalModel {
@@ -21,9 +22,9 @@ namespace PhysicalModel {
         private Dictionary<int, ILift> _waitingMap = new Dictionary<int, ILift>();
 
         public ILift CheckOpenedLift(int floorNumber) {
-            if (_waitingMap.ContainsKey(floorNumber) &&
-                _waitingMap[floorNumber].Y == Y)
-                return _waitingMap[floorNumber];
+            if (_waitingMap.ContainsKey(floorNumber-1) &&
+                _waitingMap[floorNumber-1].Y == Y)
+                return _waitingMap[floorNumber-1];
             return null;
         }
 
@@ -46,21 +47,31 @@ namespace PhysicalModel {
 
         public void ClockHandler() {
             var positions = new List<Position>(_passengers.Count);
-            foreach(IMovable movable in _passengers) {
+            Parallel.ForEach(_passengers, HandleClock);
+
+            void HandleClock(IMovable movable) {
                 if (!movable.HandleClock())
-                    continue;
+                    return;
                 positions.Add(movable.GetPosition());
             }
+
             PositionsChanged(GetPosition(), positions);
+
+            foreach (KeyValuePair<int, ILift> pair in _waitingMap) {
+                if (pair.Value.Y == Y)
+                    _waitingMap.Remove(pair.Key);
+            }
         }
 
         public event Action<Position,List<Position>> PositionsChanged;
 
-        public void ShowScoreboardHandler(int targetFloor, ILift lift) {
+        public void ShowScoreboard(int targetFloor, ILift lift) {
+            Console.WriteLine("Show " + targetFloor + " от лифта " + lift.Y);
             _waitingMap.Add(targetFloor,lift);
         }
-        public void SuppressScoreboardHandler(int targetFloor) {
-            _waitingMap.Remove(targetFloor);
+
+        public void CallLift(int startingFloor, int targetFloor) {
+            LiftCalling(startingFloor, targetFloor);
         }
 
         public event Action<int, int> LiftCalling;
