@@ -4,7 +4,7 @@ using System.Text;
 using Entities;
 
 namespace PhysicalModel {
-    class LiftsHall : ILiftsHall {
+    public class LiftsHall : ILiftsHall {
              
         public Size Size { get; }
 
@@ -27,11 +27,11 @@ namespace PhysicalModel {
             return null;
         }
 
-        private LiftsHall(int number, IFloor floor) {
+        public LiftsHall(int number, IFloor floor) {
+            Size = new Size(20.0, floor.Size.Height);
             Number = number;
             X = floor.X - Size.Length;
             Y = floor.Y;
-            Size = new Size(20.0,floor.Size.Height);
         }       
 
         public bool AddPassenger(IPassenger passenger) {

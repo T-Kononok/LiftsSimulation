@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-using PhysicalModel.Others.Interfaces;
 using static System.Math;
 
 namespace PhysicalModel {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Entities;
 
 namespace PhysicalModel {
-    class Shafts : IShafts {
+    public class Shafts : IShafts {
         public Size Size { get; }
 
         public double X { get; set; }

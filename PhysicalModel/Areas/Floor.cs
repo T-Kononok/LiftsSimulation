@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PhysicalModel {
-    class Floor : IFloor{
+    public class Floor : IFloor{
 
         public Size Size { get; }
 

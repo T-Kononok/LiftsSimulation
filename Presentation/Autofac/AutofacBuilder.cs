@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Entities;
 using IModel;
+using PhysicalModel;
 using Services;
 
 namespace Presentation.Autofac {
@@ -17,6 +18,17 @@ namespace Presentation.Autofac {
             builder.RegisterType<PassengerAddableService>().As<IPassengerAddable>().SingleInstance();
             builder.RegisterType<GivingMovableInfoService>().As<IGivingMovableInfo>().SingleInstance();
             builder.RegisterType<GivingXYChangedEventServise>().As<IGivingXYChangedEvent>().SingleInstance();
+
+            builder.RegisterType<Floor>().As<IFloor>();
+            builder.RegisterType<LiftsHall>().As<ILiftsHall>();
+            builder.RegisterType<Shafts>().As<IShafts>().SingleInstance();
+            builder.RegisterType<Passenger>().As<IPassenger>();
+            builder.RegisterType<PassengerState1>().As<IPassengerState>();
+            builder.RegisterType<Lift>().As<ILift>();
+
+            builder.RegisterType<Building>().As<IBuilding>().SingleInstance();
+            builder.RegisterType<ClockGenerator>().As<IClockGenerator>().SingleInstance();
+            builder.RegisterType<ManagerLifts>().As<IManagerLifts>().SingleInstance();
 
             return builder.Build();
         }
