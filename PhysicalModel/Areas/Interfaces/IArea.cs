@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Entities;
 
 namespace PhysicalModel {
-    interface IArea : IMaterial {
+    public interface IArea : IMaterial {
 
         public Position GetPosition();       
 

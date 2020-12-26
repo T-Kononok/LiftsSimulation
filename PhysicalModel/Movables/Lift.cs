@@ -6,7 +6,7 @@ using Entities;
 using static System.Math;
 
 namespace PhysicalModel {
-    class Lift : ILift {
+    public class Lift : ILift {
         public int Capacity { get; }
 
         private double _speed = 0.0;
@@ -45,11 +45,11 @@ namespace PhysicalModel {
 
         private readonly List<IPassenger> _passengers = new List<IPassenger>();
 
-        public Lift(LiftStartingData data, IMaterial material) {
+        public Lift(LiftStartingData data, double passengersSize) {
             Capacity = data.Сapacity;
             MaxSpeed = data.MaxSpeed;
             MaxAcceleration = data.MaxAcceleration;
-            Size = new Size(Capacity * material.Size.Length*1.5, 2.5);
+            Size = new Size(Capacity * passengersSize*1.5, 2.5);
         }
 
         public bool AddPassenger(IPassenger passenger) {

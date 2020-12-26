@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace PhysicalModel {
-    interface IFloor : IArea {
+    public interface IFloor : IArea {
 
         public ILiftsHall Hall { get; }
 

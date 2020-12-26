@@ -4,14 +4,22 @@ using System.Text;
 using Entities;
 
 namespace PhysicalModel {
-    interface IBuilding {
-        public Size Size { get; }
+    public interface IBuilding {
 
         public bool AddPassenger(IPassenger passenger);
 
         public bool TurnOnAlarm();
         public bool TurnOffAlarm();
 
-        public void SetPositionsChangedHandlers(Action<Position, List<Position>> handler);
+        public bool SetFloors(int quantityFloors,
+            IFloor.Factory floorFactory, ILiftsHall.Factory hallFactory);
+
+        public bool SetLifts(List<ILift> lifts, IShafts.Factory shaftsFactory);
+
+        public bool SetManager(IManagerLifts manager);
+
+        public bool SetGenerator(IClockGenerator generator);
+
+        public bool SetPositionsChangedHandlers(Action<Position, List<Position>> handler);
     }
 }

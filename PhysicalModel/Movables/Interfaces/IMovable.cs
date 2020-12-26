@@ -4,7 +4,7 @@ using System.Text;
 using Entities;
 
 namespace PhysicalModel {
-    interface IMovable : IMaterial {
+    public interface IMovable : IMaterial {
 
         public IArea Location { get; set; }
 

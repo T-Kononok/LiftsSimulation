@@ -4,7 +4,7 @@ using System.Text;
 using Entities;
 
 namespace PhysicalModel {
-    class Passenger : IPassenger {
+    public class Passenger : IPassenger {
 
         private IPassengerState _state;
  

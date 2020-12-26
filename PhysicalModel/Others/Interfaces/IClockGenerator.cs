@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace PhysicalModel {
-    interface IClockGenerator {
+    public interface IClockGenerator {
 
         double Сoefficient { get; set; }
 

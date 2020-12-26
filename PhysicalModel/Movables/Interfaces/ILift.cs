@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace PhysicalModel {
-    interface ILift : IArea, IMovable {
+    public interface ILift : IArea, IMovable {
         public int Capacity { get; }
         public double Speed { get; }
         public double MaxSpeed { get; }

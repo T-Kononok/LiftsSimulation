@@ -7,7 +7,7 @@ using PhysicalModel.Others.Interfaces;
 using static System.Math;
 
 namespace PhysicalModel {
-    class ManagerLifts : IManagerLifts {
+    public class ManagerLifts : IManagerLifts {
 
         private List<ILift> _lifts = new List<ILift>();
 

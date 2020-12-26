@@ -4,8 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Math;
 
-namespace PhysicalModel.Others {
-    class ClockGenerator : IClockGenerator{
+namespace PhysicalModel {
+    public class ClockGenerator : IClockGenerator{
 
         private readonly Task _task;
 
