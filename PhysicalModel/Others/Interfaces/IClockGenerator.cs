@@ -7,7 +7,7 @@ namespace PhysicalModel {
 
         double Сoefficient { get; set; }
 
-        DateTime Time { get; }
+        public int Time { get; }
 
         public event Action Clock;
 

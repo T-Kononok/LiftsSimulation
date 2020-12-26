@@ -13,7 +13,8 @@ namespace PhysicalModel {
 
         private bool _isPause = false;
 
-        public DateTime Time { get; } = new DateTime();
+        private int _time = 0;
+        public int Time { get { return _time; } }
 
         private double _coefficient = 1.0;
         public double Сoefficient {
@@ -51,7 +52,7 @@ namespace PhysicalModel {
             while (_isWork) {
                 while (_isPause) { }
                 Task.Delay(GetPseudoSecond()).Wait();
-                Time.AddSeconds(1);
+                _time++;
                 Clock();
             }
         }

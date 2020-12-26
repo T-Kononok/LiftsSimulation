@@ -75,8 +75,10 @@ namespace PhysicalModel {
             _shafts.PositionsChanged += handler;
             foreach (ILift lift in _shafts)
                 lift.PositionsChanged += handler;
-            foreach (IFloor floor in _floors)
+            foreach (IFloor floor in _floors) {
                 floor.PositionsChanged += handler;
+                floor.Hall.PositionsChanged += handler;
+            }
             return true;
         }
     }
