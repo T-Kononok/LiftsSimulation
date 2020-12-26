@@ -9,5 +9,10 @@ namespace PhysicalModel {
         public double MaxSpeed { get; }
         public double Acceleration { get; }
         public double MaxAcceleration { get; }
+
+        public double NeedMoveTo { get; set; }
+        public int Direction { get; set; }
+
+        public double GetBrakeWay();
     }
 }

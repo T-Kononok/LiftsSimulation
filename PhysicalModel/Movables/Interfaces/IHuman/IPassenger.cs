@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace PhysicalModel {
-    interface IHuman : IMovable{
+    interface IPassenger : IMovable{
         public String Name { get; }
         public int StartingFloor { get; }
         public int TargetFloor { get; }
-        public void TransitionTo(IHumanState state);
+        public void TransitionTo(IPassengerState state);
     }
 }

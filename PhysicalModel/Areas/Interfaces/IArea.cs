@@ -8,11 +8,11 @@ namespace PhysicalModel {
 
         public Position GetPosition();       
 
-        public bool AddMovable(IMovable movable);
-        public bool RemoveMovable(IMovable movable);       
+        public bool AddPassenger(IPassenger passenger);
+        public bool RemovePassenger(IPassenger passenger);
 
-        public void GetClockHandler(IClockGenerator generator);
+        public void ClockHandler();
 
-        public event Action<Position, List<Position>> PositionsChanged;
+        public event Action<Position, List<Position>> PositionsChanged;       
     }
 }

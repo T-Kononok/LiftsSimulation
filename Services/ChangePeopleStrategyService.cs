@@ -2,8 +2,8 @@
 using IModel;
 
 namespace Services {
-    public class ChangePeopleStrategyService : IChangePeopleStrategy {
-        public void ChangePeopleStrategy(PeopleStrategies strategy) {
+    public class ChangePeopleStrategyService : IChangePassengerStrategy {
+        public void ChangePeopleStrategy(PassengerStrategies strategy) {
             throw new NotImplementedException();
         }
     }

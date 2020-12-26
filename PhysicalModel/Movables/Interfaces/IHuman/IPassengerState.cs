@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace PhysicalModel {
-    interface IHumanState {
-        public void SetContext(IHuman context);
+    interface IPassengerState {
+        public void SetContext(IPassenger context);
         public bool HandleClock();
     }
 }

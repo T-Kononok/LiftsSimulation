@@ -43,7 +43,7 @@ namespace PhysicalModel {
             return new LiftPosition(X, Y);
         }
 
-        private readonly List<IMovable> _movables = new List<IMovable>();
+        private readonly List<IPassenger> _passengers = new List<IPassenger>();
 
         public Lift(LiftStartingData data, IMaterial material) {
             Capacity = data.Сapacity;
@@ -52,30 +52,27 @@ namespace PhysicalModel {
             Size = new Size(Capacity * material.Size.Length*1.5, 2.5);
         }
 
-        public bool AddMovable(IMovable movable) {
-            if (_movables.Count == Capacity)
+        public bool AddPassenger(IPassenger passenger) {
+            if (_passengers.Count == Capacity)
                 return false;
-            _movables.Add(movable);
-            movable.Location = this;
+            _passengers.Add(passenger);
+            passenger.Location = this;
             return true;
         }
-        public bool RemoveMovable(IMovable movable) {
-            return _movables.Remove(movable);
+        public bool RemovePassenger(IPassenger passenger) {
+            return _passengers.Remove(passenger);
         }
 
-        private void ClockHandler() {
-            var positions = new List<Position>(_movables.Count);
-            Parallel.ForEach(_movables, HandleClock);
+        public void ClockHandler() {
+            var positions = new List<Position>(_passengers.Count);
+            Parallel.ForEach(_passengers, PassengerHandleClock);
             PositionsChanged(GetPosition(), positions);
 
-            void HandleClock(IMovable movable) {
+            void PassengerHandleClock(IMovable movable) {
                 if (!movable.HandleClock())
                     return;
                 positions.Add(movable.GetPosition());
             }
-        }
-        public void GetClockHandler(IClockGenerator generator) {
-            generator.Clock += ClockHandler;
         }
 
         public event Action<Position,List<Position>> PositionsChanged;
@@ -85,7 +82,7 @@ namespace PhysicalModel {
                 Acceleration = 0;
                 return true;
             }
-            if (NeedMoveTo == 0.0 || !CheckBrake())
+            if (Acceleration == 0 || !CheckBrake())
                 Acceleration = MaxAcceleration;
             if (0 < Speed && Speed < MaxSpeed)
                 Speed += Acceleration;

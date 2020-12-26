@@ -17,7 +17,7 @@ namespace PhysicalModel {
 
         public ILiftsHall Hall { get; }
 
-        private readonly LinkedList<IMovable> _movables = new LinkedList<IMovable>();
+        private readonly LinkedList<IPassenger> _passengers = new LinkedList<IPassenger>();
 
         public Floor(int number, double height, double x, double y, ILiftsHall.Factory factory) {
             Size = new Size(80.0, height);
@@ -26,20 +26,20 @@ namespace PhysicalModel {
             Hall = factory(number, this);
         }     
 
-        public bool AddMovable(IMovable movable) {
-            _movables.AddFirst(movable);
-            movable.Location = this;
-            movable.Y = 0;
-            movable.X = Size.Length * 0.9;
+        public bool AddPassenger(IPassenger passenger) {
+            _passengers.AddFirst(passenger);
+            passenger.Location = this;
+            passenger.Y = 0;
+            passenger.X = Size.Length * 0.9;
             return true;
         }
-        public bool RemoveMovable(IMovable movable) {
-            return _movables.Remove(movable);
-        }        
+        public bool RemovePassenger(IPassenger passenger) {
+            return _passengers.Remove(passenger);
+        }
 
-        private void ClockHandler() {
-            var positions = new List<Position>(_movables.Count);
-            Parallel.ForEach(_movables, HandleClock);
+        public void ClockHandler() {
+            var positions = new List<Position>(_passengers.Count);
+            Parallel.ForEach(_passengers, HandleClock);
             PositionsChanged(GetPosition(), positions);
 
             void HandleClock(IMovable movable) {
@@ -47,10 +47,6 @@ namespace PhysicalModel {
                     return;
                 positions.Add(movable.GetPosition());
             }
-        }
-        public void GetClockHandler(IClockGenerator generator) {
-            generator.Clock += ClockHandler;
-            Hall.GetClockHandler(generator);
         }
 
         public event Action<Position,List<Position>> PositionsChanged;    

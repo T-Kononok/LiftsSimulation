@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
@@ -15,6 +16,12 @@ namespace PhysicalModel {
 
         private readonly List<ILift> _lifts;
 
+        public IEnumerator GetEnumerator() {
+            for (int i = 0; i < _lifts.Count; i++) {
+                yield return _lifts[i];
+            }
+        }
+
         public Shafts(List<ILift> lifts, double x, double y, double interval, double height) {
             _lifts = lifts;
             var liftX = 0.0;
@@ -29,14 +36,14 @@ namespace PhysicalModel {
             Size = new Size(liftX - interval, height);
         }
 
-        public bool AddMovable(IMovable movable) {
+        public bool AddPassenger(IPassenger passenger) {
             return false;
         }
-        public bool RemoveMovable(IMovable movable) {
+        public bool RemovePassenger(IPassenger passenger) {
             return false;
         }
 
-        private void ClockHandler() {
+        public void ClockHandler() {
             var positions = new List<Position>(_lifts.Count);
             Parallel.ForEach(_lifts, HandleClock);
             PositionsChanged(GetPosition(), positions);
@@ -47,17 +54,7 @@ namespace PhysicalModel {
                 positions.Add(movable.GetPosition());
             }
         }
-        public void GetClockHandler(IClockGenerator generator) {
-            generator.Clock += ClockHandler;
-            foreach (ILift lift in _lifts)
-                lift.GetClockHandler(generator);
-        }
 
         public event Action<Position,List<Position>> PositionsChanged;
-
-        public void SetLiftsHandlers(Action<Position, List<Position>> handler) {
-            foreach (ILift lift in _lifts)
-                lift.PositionsChanged += handler;
-        }
     }
 }

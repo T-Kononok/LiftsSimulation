@@ -3,8 +3,9 @@ using IModel;
 using Entities;
 
 namespace Services {
-    public class GivingEntityInfoService : IGivingEntityInfo {
-        public HumanInfo GetEntityInfo(EntityLocation location) {
+    public class PassengerAddableService : IPassengerAddable {
+
+        public bool AddPassenger(PassengerStartingData data) {
             throw new NotImplementedException();
         }
     }

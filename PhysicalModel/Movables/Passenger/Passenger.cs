@@ -4,9 +4,9 @@ using System.Text;
 using Entities;
 
 namespace PhysicalModel {
-    class Human : IHuman {
+    class Passenger : IPassenger {
 
-        private IHumanState _state;
+        private IPassengerState _state;
  
         public string Name { get; }
         public int StartingFloor { get; }
@@ -22,16 +22,16 @@ namespace PhysicalModel {
             Y = y;
         }
         public Position GetPosition() {
-            return new HumanPosition(X, Y);
+            return new PassengerPosition(X, Y);
         }
 
-        public Human(HumanStartingData data, IHumanState state) {
+        public Passenger(PassengerStartingData data, IPassengerState state) {
             Name = data.Name;
             StartingFloor = data.StartingFloor;
             TargetFloor = data.TargetFloor;
             TransitionTo(state);
         }
-        public void TransitionTo(IHumanState state) {
+        public void TransitionTo(IPassengerState state) {
             _state = state;
             _state.SetContext(this);
         }

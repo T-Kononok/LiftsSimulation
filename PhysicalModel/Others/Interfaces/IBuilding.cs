@@ -7,7 +7,7 @@ namespace PhysicalModel {
     interface IBuilding {
         public Size Size { get; }
 
-        public bool AddMovable(IMovable movable, int floorNumber);
+        public bool AddPassenger(IPassenger passenger);
 
         public bool TurnOnAlarm();
         public bool TurnOffAlarm();

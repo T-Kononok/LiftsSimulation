@@ -7,5 +7,10 @@ namespace PhysicalModel {
         public int Number { get; }
 
         public delegate ILiftsHall Factory(int number, IFloor floor);
+
+        public event Action<int, int> LiftCalling;
+
+        public void ShowScoreboardHandler(int targetFloor, ILift lift);
+        public void SuppressScoreboardHandler(int targetFloor);
     }
 }

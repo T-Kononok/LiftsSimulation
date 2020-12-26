@@ -3,8 +3,9 @@ using IModel;
 using Entities;
 
 namespace Services {
-    public class EntityAddableService : IEntityAddable {
-        public bool AddEntity(StartingData data) {
+    public class GivingMovableInfoService : IGivingMovableInfo {
+
+        public MovableInfo GetMovableInfo(Position position) {
             throw new NotImplementedException();
         }
     }

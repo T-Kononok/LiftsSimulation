@@ -16,7 +16,16 @@ namespace PhysicalModel {
 
         public int Number { get; }
 
-        private readonly LinkedList<IMovable> _movables = new LinkedList<IMovable>();      
+        private readonly LinkedList<IPassenger> _passengers = new LinkedList<IPassenger>();
+
+        private Dictionary<int, ILift> _waitingMap = new Dictionary<int, ILift>();
+
+        public ILift CheckOpenedLift(int floorNumber) {
+            if (_waitingMap.ContainsKey(floorNumber) &&
+                _waitingMap[floorNumber].Y == Y)
+                return _waitingMap[floorNumber];
+            return null;
+        }
 
         private LiftsHall(int number, IFloor floor) {
             Number = number;
@@ -25,28 +34,35 @@ namespace PhysicalModel {
             Size = new Size(20.0,floor.Size.Height);
         }       
 
-        public bool AddMovable(IMovable movable) {
-            _movables.AddFirst(movable);
-            movable.Location = this;
+        public bool AddPassenger(IPassenger passenger) {
+            _passengers.AddFirst(passenger);
+            passenger.Location = this;
+            LiftCalling(Number, passenger.TargetFloor);
             return true;
         }
-        public bool RemoveMovable(IMovable movable) {
-            return _movables.Remove(movable);
-        }       
+        public bool RemovePassenger(IPassenger passenger) {
+            return _passengers.Remove(passenger);
+        }
 
-        private void ClockHandler() {
-            var positions = new List<Position>(_movables.Count);
-            foreach(IMovable movable in _movables) {
+        public void ClockHandler() {
+            var positions = new List<Position>(_passengers.Count);
+            foreach(IMovable movable in _passengers) {
                 if (!movable.HandleClock())
                     continue;
                 positions.Add(movable.GetPosition());
             }
             PositionsChanged(GetPosition(), positions);
         }
-        public void GetClockHandler(IClockGenerator generator) {
-            generator.Clock += ClockHandler;
-        }
 
         public event Action<Position,List<Position>> PositionsChanged;
+
+        public void ShowScoreboardHandler(int targetFloor, ILift lift) {
+            _waitingMap.Add(targetFloor,lift);
+        }
+        public void SuppressScoreboardHandler(int targetFloor) {
+            _waitingMap.Remove(targetFloor);
+        }
+
+        public event Action<int, int> LiftCalling;
     }
 }

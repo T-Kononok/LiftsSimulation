@@ -30,7 +30,7 @@ namespace PhysicalModel.Others {
         public event Action Clock;
 
         public ClockGenerator() {
-            _task = new Task(Action);
+            _task = new Task(Work);
         }
 
         public void Start() {
@@ -47,7 +47,7 @@ namespace PhysicalModel.Others {
 
         public void Play() => _isPause = false;
 
-        private void Action() {
+        private void Work() {
             while (_isWork) {
                 while (_isPause) { }
                 Task.Delay(GetPseudoSecond()).Wait();
