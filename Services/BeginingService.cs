@@ -46,32 +46,9 @@ namespace Services {
             _building.SetLifts(lifts, _shaftsFactory);
             _building.SetGenerator(_generator);
             _building.SetManager(_manager);
-
-            _building.SetPositionsChangedHandlers(Handle);
-
-            void Handle(Position position, List<Position> list) {
-                Console.WriteLine(position + " : " + list.Count);
-            }
+            _isCreate = true;
 
             _generator.Start();
-            Console.WriteLine(_generator.Time);
-            Task.Delay(1000).Wait();
-            Console.WriteLine(_generator.Time);
-            Task.Delay(1000).Wait();
-            _generator.Pause();
-            Task.Delay(3000).Wait();
-            _generator.Play();
-            _generator.Сoefficient *= 0.5;
-            Console.WriteLine(_generator.Time);
-            Task.Delay(1000).Wait();
-            Console.WriteLine(_generator.Time);
-            Task.Delay(1000).Wait();
-            Console.WriteLine(_generator.Time);
-            Task.Delay(1000).Wait();
-            Console.WriteLine(_generator.Time);
-            Task.Delay(1000).Wait();
-
-            _isCreate = true;
         }
     }
 }

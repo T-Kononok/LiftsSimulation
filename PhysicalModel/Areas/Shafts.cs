@@ -29,7 +29,7 @@ namespace PhysicalModel {
                 lift.Location = this;
                 lift.X = liftX;
                 lift.Y = 0.0;
-                liftX += lift.Size.Height + interval;
+                liftX += lift.Size.Length + interval;
             }
             X = x;
             Y = y;

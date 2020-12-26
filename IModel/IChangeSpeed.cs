@@ -2,7 +2,7 @@
 
 namespace IModel {
     public interface IChangeSpeed {
-        DateTime GetTime();
+        int GetTime();
         void Pause();
         void Play();
         void ChangeSpeed(double coefficient);

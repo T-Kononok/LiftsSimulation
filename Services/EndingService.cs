@@ -1,10 +1,19 @@
 ﻿using System;
 using IModel;
+using PhysicalModel;
 
 namespace Services {
     public class EndingService : IEnding {
+
+        IClockGenerator _generator;
+
+        public EndingService(IClockGenerator generator) {
+            _generator = generator;
+        }
+
         public bool End() {
-            throw new NotImplementedException();
+            _generator.Stop();
+            return true;
         }
     }
 }

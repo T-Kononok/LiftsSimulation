@@ -1,13 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using Entities;
 using IModel;
+using PhysicalModel;
 
 namespace Services {
     public class GivingXYChangedEventServise : IGivingXYChangedEvent {
 
-        public event IGivingXYChangedEvent.XYChangedHandler PositionsChanged;
+        public GivingXYChangedEventServise(IBuilding building) {
+            building.SetPositionsChangedHandlers(Handler);
+        }
 
-        public void SetXYChangedHandler(IGivingXYChangedEvent.XYChangedHandler handler) {
-            throw new NotImplementedException();
+        public event Action<Position, List<Position>> PositionsChanged;
+
+        private void Handler(Position position, List<Position> list) {
+            PositionsChanged(position, list);
         }
     }
 }

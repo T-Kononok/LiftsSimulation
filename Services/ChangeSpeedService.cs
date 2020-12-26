@@ -1,22 +1,30 @@
 ﻿using System;
 using IModel;
+using PhysicalModel;
 
 namespace Services {
     public class ChangeSpeedService : IChangeSpeed {
-        public void ChangeSpeed(double coefficient) {
-            throw new NotImplementedException();
+
+        IClockGenerator _generator;
+
+        public ChangeSpeedService(IClockGenerator generator) {
+            _generator = generator;
         }
 
-        public DateTime GetTime() {
-            throw new NotImplementedException();
+        public void ChangeSpeed(double coefficient) {
+            _generator.Сoefficient = coefficient;
+        }
+
+        public int GetTime() {
+            return _generator.Time;
         }
 
         public void Pause() {
-            throw new NotImplementedException();
+            _generator.Pause();
         }
 
         public void Play() {
-            throw new NotImplementedException();
+            _generator.Play();
         }
     }
 }
